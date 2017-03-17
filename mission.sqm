@@ -8,14 +8,14 @@ class EditorData
 	toggles=1;
 	class ItemIDProvider
 	{
-		nextID=34;
+		nextID=35;
 	};
 	class Camera
 	{
-		pos[]={3271.1143,13.197447,990.38568};
-		dir[]={0.88851315,-0.44939393,-0.093509652};
-		up[]={0.44700196,0.89328194,-0.047044307};
-		aside[]={-0.10467236,-8.6586806e-007,-0.99457932};
+		pos[]={3281.1707,23.297665,1013.8134};
+		dir[]={-0.42296341,-0.4311721,-0.79709947};
+		up[]={-0.20214586,0.90221202,-0.38095325};
+		aside[]={-0.88341534,-1.3298413e-006,0.4687669};
 	};
 };
 binarizationWanted=0;
@@ -24,13 +24,14 @@ addons[]=
 	"A3_Characters_F",
 	"A3_Soft_F_Exp_LSV_01",
 	"A3_Structures_F_Heli_Items_Airport",
-	"A3_Weapons_F_Explosives"
+	"A3_Weapons_F_Explosives",
+	"A3_Armor_F_Beta_APC_Tracked_01"
 };
 class AddonsMetaData
 {
 	class List
 	{
-		items=4;
+		items=5;
 		class Item0
 		{
 			className="A3_Characters_F";
@@ -56,6 +57,13 @@ class AddonsMetaData
 		{
 			className="A3_Weapons_F";
 			name="Arma 3 Alpha - Weapons and Accessories";
+			author="Bohemia Interactive";
+			url="https://www.arma3.com";
+		};
+		class Item4
+		{
+			className="A3_Armor_F_Beta";
+			name="Arma 3 Beta - Armored Land Vehicles";
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
@@ -87,7 +95,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=29;
+		items=30;
 		class Item0
 		{
 			dataType="Group";
@@ -100,7 +108,7 @@ class Mission
 					dataType="Object";
 					class PositionInfo
 					{
-						position[]={3279.8618,5.0014391,990.98358};
+						position[]={3279.7046,5.0014391,990.71924};
 					};
 					side="West";
 					flags=6;
@@ -143,7 +151,7 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={3279.8618,7.1761513,990.93451};
+				position[]={3279.7046,7.1761513,990.67017};
 			};
 			side="West";
 			flags=6;
@@ -588,6 +596,23 @@ class Mission
 			id=33;
 			type="APERSBoundingMine";
 			atlOffset=-5.7220459e-006;
+		};
+		class Item29
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={3270.4951,7.4492421,992.849};
+				angles[]={0,0.74817032,0};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				name="tank";
+			};
+			id=34;
+			type="B_APC_Tracked_01_CRV_F";
 		};
 	};
 };

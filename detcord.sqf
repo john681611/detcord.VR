@@ -1,3 +1,19 @@
+detConfig = [
+//[[Vehicle('s')],ropeattpoint,baglaunchpoint,vectors]
+  ["LSV_01_base_F",[0,-1.7,-1],[0,-1.7,0], [[0,-0.5,-0.5],[0,0.5,-0.5]]],
+  ["APC_Tracked_01_base_F",[-0.5,-2.1,-0.1],[-0.5,-2.1,0.1],[[0,-0.5,0.75],[0,-0.75,-0.5]]]
+];
+
+detFindVehConfig = {
+  _return = ["FAIL"];
+  {
+    if(_this isKindOf (_x select 0)) exitWith {
+    _return = _x;
+    };
+  } forEach detConfig;
+    _return
+};
+
 detDetonateRope = {
   private ["_veh"];
   _rope = _this ;
@@ -15,18 +31,20 @@ detDetonateRope = {
 detGenRope = {
   private ["_veh"];
   _veh  = _this;
+  _pos = _veh call detFindVehConfig;
+  if((_pos select 0) =="FAIL") exitWith {hint "Missing Vehicle Config";};
   _bag = "Land_RotorCoversBag_01_F" createVehicle [0,0,0];
-  _rope =  ropeCreate [_veh, [0,-1.7,-1], (_veh getVariable ["det_length",45])];
-  _bag attachTo [_veh,[0,-1.7,0]];
-  _bag setVectorDirAndUp [[0,-0.5,-0.5],[0,0.5,-0.5]];
-  [_bag,[0,0,0],[0,0,-1]] ropeAttachTo _rope;
+  _bag attachTo [_veh,(_pos select 2)];
+  _bag setVectorDirAndUp (_pos select 3);
   sleep 3;
   detach _bag;
+  _rope =  ropeCreate [_veh, (_pos select 1), (_veh getVariable ["det_length",45])];
+  [_bag,[0,0,0],[0,0,-1]] ropeAttachTo _rope;
   _source01 = "#particlesource" createVehicle [0,0,0];
   _source01 setParticleClass "missile1";
   _bag setVelocityModelSpace [0,0,-30];
   playSound3D ["A3\Sounds_F\weapons\Rockets\missile_1.wss", _veh];
-  _source01 attachTo [_bag,[0,0,1]];
+  _source01 attachTo [_bag,[0,0,0.5]];
    sleep 2;
    deleteVehicle _source01;
   _veh setVariable ["det_rope", _rope, true];
@@ -60,4 +78,5 @@ detInit = {
   _veh setVariable ["det_ammo", (_this select 1), true];
   _veh setVariable ["det_length", (_this select 2), true];
 };
-[car,2,80] spawn detInit;
+[car,4,80] spawn detInit;
+[tank,6,120] spawn detInit;
