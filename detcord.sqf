@@ -17,7 +17,7 @@ detFindVehConfig = {
 detDetonateRope = {
   private ["_veh"];
   _rope = _this ;
-  while { ropeLength _rope > 15} do
+  while { ropeLength _rope > 20} do
     {
         _ends = ropeEndPosition _rope;
       _temp = "DemoCharge_Remote_Ammo"  createVehicle (_ends select 1);
@@ -25,6 +25,7 @@ detDetonateRope = {
         ropeCut [_rope,ropeLength _rope-10];
         sleep 0.0002;
     };
+    sleep 15;
     ropeDestroy _rope;
 };
 
@@ -38,7 +39,7 @@ detGenRope = {
   _bag setVectorDirAndUp (_pos select 3);
   sleep 3;
   detach _bag;
-  _rope =  ropeCreate [_veh, (_pos select 1), (_veh getVariable ["det_length",45])];
+  _rope =  ropeCreate [_veh, (_pos select 1), (_veh getVariable "det_length")+20];
   [_bag,[0,0,0],[0,0,-1]] ropeAttachTo _rope;
   _source01 = "#particlesource" createVehicle [0,0,0];
   _source01 setParticleClass "missile1";
