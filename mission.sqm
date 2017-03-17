@@ -8,14 +8,14 @@ class EditorData
 	toggles=1;
 	class ItemIDProvider
 	{
-		nextID=35;
+		nextID=39;
 	};
 	class Camera
 	{
-		pos[]={3281.1707,23.297665,1013.8134};
-		dir[]={-0.42296341,-0.4311721,-0.79709947};
-		up[]={-0.20214586,0.90221202,-0.38095325};
-		aside[]={-0.88341534,-1.3298413e-006,0.4687669};
+		pos[]={3276.9543,13.15483,1007.1002};
+		dir[]={0.06497255,-0.25386181,-0.96516347};
+		up[]={0.017060207,0.96717364,-0.25343242};
+		aside[]={-0.9978404,-2.1989581e-006,-0.067169555};
 	};
 };
 binarizationWanted=0;
@@ -95,7 +95,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=30;
+		items=32;
 		class Item0
 		{
 			dataType="Group";
@@ -108,7 +108,8 @@ class Mission
 					dataType="Object";
 					class PositionInfo
 					{
-						position[]={3279.7046,5.0014391,990.71924};
+						position[]={3280.3359,5.0014391,997.10815};
+						angles[]={-0,3.5221181,0};
 					};
 					side="West";
 					flags=6;
@@ -123,27 +124,6 @@ class Mission
 			class Attributes
 			{
 			};
-			class CrewLinks
-			{
-				class LinkIDProvider
-				{
-					nextID=1;
-				};
-				class Links
-				{
-					items=1;
-					class Item0
-					{
-						linkID=0;
-						item0=2;
-						item1=1;
-						class CustomData
-						{
-							role=1;
-						};
-					};
-				};
-			};
 			id=0;
 		};
 		class Item1
@@ -151,10 +131,10 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={3279.7046,7.1761513,990.67017};
+				position[]={3282.199,7.1761513,990.56116};
 			};
-			side="West";
-			flags=6;
+			side="Empty";
+			flags=4;
 			class Attributes
 			{
 				name="car";
@@ -613,6 +593,150 @@ class Mission
 			};
 			id=34;
 			type="B_APC_Tracked_01_CRV_F";
+		};
+		class Item30
+		{
+			dataType="Group";
+			side="West";
+			class Entities
+			{
+				items=1;
+				class Item0
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={3278.717,5.0014391,997.30499};
+						angles[]={0,3.5221093,0};
+					};
+					side="West";
+					flags=6;
+					class Attributes
+					{
+						isPlayable=1;
+					};
+					id=36;
+					type="B_Soldier_F";
+					class CustomAttributes
+					{
+						class Attribute0
+						{
+							property="speaker";
+							expression="_this setspeaker _value;";
+							class Value
+							{
+								class data
+								{
+									class type
+									{
+										type[]=
+										{
+											"STRING"
+										};
+									};
+									value="Male04ENG";
+								};
+							};
+						};
+						class Attribute1
+						{
+							property="pitch";
+							expression="_this setpitch _value;";
+							class Value
+							{
+								class data
+								{
+									class type
+									{
+										type[]=
+										{
+											"SCALAR"
+										};
+									};
+									value=1;
+								};
+							};
+						};
+						nAttributes=2;
+					};
+				};
+			};
+			class Attributes
+			{
+			};
+			id=35;
+		};
+		class Item31
+		{
+			dataType="Group";
+			side="West";
+			class Entities
+			{
+				items=1;
+				class Item0
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={3276.948,5.0014391,997.703};
+						angles[]={0,3.5221093,0};
+					};
+					side="West";
+					flags=6;
+					class Attributes
+					{
+						isPlayable=1;
+					};
+					id=38;
+					type="B_Soldier_F";
+					class CustomAttributes
+					{
+						class Attribute0
+						{
+							property="speaker";
+							expression="_this setspeaker _value;";
+							class Value
+							{
+								class data
+								{
+									class type
+									{
+										type[]=
+										{
+											"STRING"
+										};
+									};
+									value="Male08ENG";
+								};
+							};
+						};
+						class Attribute1
+						{
+							property="pitch";
+							expression="_this setpitch _value;";
+							class Value
+							{
+								class data
+								{
+									class type
+									{
+										type[]=
+										{
+											"SCALAR"
+										};
+									};
+									value=1.03;
+								};
+							};
+						};
+						nAttributes=2;
+					};
+				};
+			};
+			class Attributes
+			{
+			};
+			id=37;
 		};
 	};
 };

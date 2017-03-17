@@ -22,7 +22,7 @@ detDetonateRope = {
         _ends = ropeEndPosition _rope;
       _temp = "DemoCharge_Remote_Ammo"  createVehicle (_ends select 1);
       _temp setDamage 1;
-        ropeCut [_rope,ropeLength _rope-1];
+        ropeCut [_rope,ropeLength _rope-10];
         sleep 0.0002;
     };
     ropeDestroy _rope;
@@ -45,38 +45,56 @@ detGenRope = {
   _bag setVelocityModelSpace [0,0,-30];
   playSound3D ["A3\Sounds_F\weapons\Rockets\missile_1.wss", _veh];
   _source01 attachTo [_bag,[0,0,0.5]];
+  _veh remoteExec ["detUpdateTextDetonate",0,true];
+  _veh setVariable ["det_rope", _rope, true];
    sleep 2;
    deleteVehicle _source01;
-  _veh setVariable ["det_rope", _rope, true];
-  _veh setUserActionText [(_veh getVariable "det_act") , "Detonate"];
 };
 
 detAct = {
   private ["_veh"];
   _veh = _this;
   if(isNull (_veh getVariable "det_rope")) then {
-    _veh spawn detGenRope;
+    _veh  remoteExec ["detGenRope",2];
   } else {
-    (_veh getVariable "det_rope") spawn detDetonateRope;
+    (_veh getVariable "det_rope") remoteExec ["detDetonateRope", 2];
     _veh setVariable ["det_rope", objNull, true];
     _ammo = ((_veh getVariable "det_ammo")-1);
     _veh setVariable ["det_ammo", _ammo , true];
     if(_ammo < 1) then {
-      _veh removeAction  (_veh getVariable "det_act");
+      _veh remoteExec ["detRemoveAction", 0, true]
     } else {
-      _veh setUserActionText [(_veh getVariable "det_act") , "Launch DetCord"];
+      _veh  remoteExec ["detUpdateTextLaunch",0,true];
     };
   };
+};
+
+detUpdateTextLaunch = {
+  private ["_veh"];
+  _veh = _this;
+  _veh setUserActionText [(_veh getVariable "det_act") , "Launch DetCord"];
+};
+
+detUpdateTextDetonate = {
+  private ["_veh"];
+  _veh = _this;
+  _veh setUserActionText [(_veh getVariable "det_act") , "Detonate"];
+};
+
+detRemoveAction = {
+  _this removeAction  (_this getVariable "det_act");
 };
 
 detInit = {
   private ["_veh"];
   _veh = (_this select 0);
   _act =  _veh addAction ["Launch DetCord", {(_this select 0) spawn detAct;}];
-  _veh setVariable ["det_act", _act, true];
-  _veh setVariable ["det_rope", objNull, true];
-  _veh setVariable ["det_ammo", (_this select 1), true];
-  _veh setVariable ["det_length", (_this select 2), true];
+  _veh setVariable ["det_act", _act, false];
+  if(isNil {player getVariable "det_rope"}) then {
+    _veh setVariable ["det_rope", objNull, true];
+    _veh setVariable ["det_ammo", (_this select 1), true];
+    _veh setVariable ["det_length", (_this select 2), true];
+  };
 };
-[car,4,80] spawn detInit;
+[car,2,80] spawn detInit;
 [tank,6,120] spawn detInit;
