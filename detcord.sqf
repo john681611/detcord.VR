@@ -1,3 +1,8 @@
+/*How To use : Execute script with execVM
+ Remove Test Mission Inits at bottom of script or replace with your units
+ Initalisation of vehicle = [vehicle,ammo(number),(rope lenth)] spawn detInit;
+*/
+
 detConfig = [
 //[[Vehicle('s')],ropeattpoint,baglaunchpoint,vectors]
   ["LSV_01_base_F",[0,-1.7,-1],[0,-1.7,0], [[0,-0.5,-0.5],[0,0.5,-0.5]]],
@@ -111,5 +116,6 @@ detInit = {
     _veh setVariable ["det_length", (_this select 2), true];
   };
 };
+//For test Mission Remove
 [car,2,80] spawn detInit;
 [tank,6,120] spawn detInit;
