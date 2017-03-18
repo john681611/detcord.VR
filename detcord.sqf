@@ -73,13 +73,13 @@ detAct = {
 detUpdateTextLaunch = {
   private ["_veh"];
   _veh = _this;
-  _veh setUserActionText [(_veh getVariable "det_act") , "Launch DetCord"];
+  _veh setUserActionText [(_veh getVariable "det_act") , "Launch Mine Clearance Rocket"];
 };
 
 detUpdateTextDetonate = {
   private ["_veh"];
   _veh = _this;
-  _veh setUserActionText [(_veh getVariable "det_act") , "Detonate"];
+  _veh setUserActionText [(_veh getVariable "det_act") , "Detonate Explosive Rope"];
 };
 
 detRemoveAction = {
@@ -89,7 +89,7 @@ detRemoveAction = {
 detInit = {
   private ["_veh"];
   _veh = (_this select 0);
-  _act =  _veh addAction ["Launch DetCord", {(_this select 0) spawn detAct;}];
+  _act =  _veh addAction ["Launch Mine Clearance Rocket", {(_this select 0) spawn detAct;}];
   _veh setVariable ["det_act", _act, false];
   if(isNil {player getVariable "det_rope"}) then {
     _veh setVariable ["det_rope", objNull, true];
