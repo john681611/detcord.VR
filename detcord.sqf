@@ -35,21 +35,26 @@ detGenRope = {
   _pos = _veh call detFindVehConfig;
   if((_pos select 0) =="FAIL") exitWith {hint "Missing Vehicle Config";};
   _bag = "Land_RotorCoversBag_01_F" createVehicle [0,0,0];
+  _chem = "Chemlight_red" createVehicle [0,0,0];
+  _chem attachTo [_bag,[0,0,0]];
   _bag attachTo [_veh,(_pos select 2)];
   _bag setVectorDirAndUp (_pos select 3);
   sleep 3;
   detach _bag;
   _rope =  ropeCreate [_veh, (_pos select 1), (_veh getVariable "det_length")+20];
   [_bag,[0,0,0],[0,0,-1]] ropeAttachTo _rope;
+  _light = "#lightpoint" createVehicle [0,0,0];
+  [_light,_bag]  remoteExec ["detLight",0,true];
   _source01 = "#particlesource" createVehicle [0,0,0];
   _source01 setParticleClass "missile1";
+  _source01 attachTo [_bag,[0,0,0.5]];
   _bag setVelocityModelSpace [0,0,-30];
   playSound3D ["A3\Sounds_F\weapons\Rockets\missile_1.wss", _veh];
-  _source01 attachTo [_bag,[0,0,0.5]];
   _veh remoteExec ["detUpdateTextDetonate",0,true];
   _veh setVariable ["det_rope", _rope, true];
    sleep 2;
    deleteVehicle _source01;
+   deleteVehicle _light;
 };
 
 detAct = {
@@ -68,6 +73,15 @@ detAct = {
       _veh  remoteExec ["detUpdateTextLaunch",0,true];
     };
   };
+};
+
+detLight = {
+  _light  = _this select 0;
+  _bag = _this select 1;
+  _light setLightBrightness 0.8;
+  _light setLightAmbient [0.9,0.9,0.6];
+  _light setLightColor [0.9,0.9,0.6];
+  _light lightAttachObject [_bag, [0,0,0.5]];
 };
 
 detUpdateTextLaunch = {
