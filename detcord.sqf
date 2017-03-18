@@ -38,7 +38,7 @@ detGenRope = {
   private ["_veh"];
   _veh  = _this;
   _pos = _veh call detFindVehConfig;
-  if((_pos select 0) =="FAIL") exitWith {hint "Missing Vehicle Config";};
+  if((_pos select 0) =="FAIL") exitWith {"Missing Vehicle Config" remoteExec ["hint"];};
   _bag = "Land_RotorCoversBag_01_F" createVehicle [0,0,0];
   _chem = "Chemlight_red" createVehicle [0,0,0];
   _chem attachTo [_bag,[0,0,0]];
